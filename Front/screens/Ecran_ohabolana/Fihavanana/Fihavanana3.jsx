@@ -26,7 +26,6 @@ export default function Fihavanana3() {
 
   return (
     <View style={styles.container}>
-      {/* icone */}
       <Feather
         name={isDarkMode ? "moon" : "sun"}
         size={40}

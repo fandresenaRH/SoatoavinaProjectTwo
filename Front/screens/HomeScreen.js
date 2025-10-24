@@ -28,8 +28,6 @@ export default function HomeScreen({ navigation }) {
           console.error("Erreur lors du chargement des catégories: ", error);
         }
       }
-      
-
       fetchCategories();
     }, []);
 
@@ -42,8 +40,6 @@ export default function HomeScreen({ navigation }) {
           console.error("Erreur lors du chargement du proverbe: ", error);
         }
       }
-      
-
       fetchProverbe();
     }, []);
 
@@ -56,8 +52,6 @@ export default function HomeScreen({ navigation }) {
           console.error("Erreur lors du chargement des contes favories: ", error);
         }
       }
-      
-
       fetchContes();
     }, []);
 
@@ -66,48 +60,12 @@ export default function HomeScreen({ navigation }) {
     return null; 
   }
 
-  // Tableau ana catégories eo am Ho anao
-  // const categories = [
-  //   { name:'Mampalahelo', title: 'Mampalahelo', image: require('@/assets/images/image.jpg') },
-  //   { name: 'Mampihomehy', description: 'Mampihomehy', image: require('@/assets/images/image3.jpg') },
-  //   { name: 'Mampatahotra', description: 'Mampatahotra', image: require('@/assets/images/image1.jpg') },
-  //   { name: 'Mananatra', description: 'Mananatra', image: require('@/assets/images/image.jpg') },
-  // ];
   const imagesCategories = {
     "Mampalahelo": require('@/assets/images/mampalahelo.png'),
     "Mananatra": require('@/assets/images/mananatra.png'),
     "Mampatahotra": require('@/assets/images/mampitahotra.png'),
     "Mampihomehy": require('@/assets/images/mampihomehy.png'),
   }
- 
-
-// Tableau des angano eo am Tantara malaza
-  // const conte = [
-  //   {
-  //     id: 1,
-  //     title: 'Ikotofetsy sy Imahaka',
-  //     resume: "Iray andro hono dia nisy roalahy malaza be tamin'ny hefetsena sy halatra, dia Ikotofetsy sy Imahaka...",
-  //     image: require('@/assets/images/conteikotofetsy.png'),
-  //   },
-  //   {
-  //     id: 2,
-  //     title: 'Farakely sy Trimobe',
-  //     resume: "Iray andro hono dia nisy roalahy malaza be tamin'ny hefetsena sy halatra, dia Ikotofetsy sy Imahaka...",
-  //     image: require('@/assets/images/conteifarakely.png'),
-  //   },
-  //   {
-  //     id: 3,
-  //     title: 'Rapeto sy Rasoala',
-  //     resume: "Iray andro hono dia nisy roalahy malaza be tamin'ny hefetsena sy halatra, dia Ikotofetsy sy Imahaka...",
-  //     image: require('@/assets/images/image3.jpg'),
-  //   },
-  //   {
-  //     id: 4,
-  //     title: 'Ikotofetsy sy Imahaka',
-  //     resume: "Iray andro hono dia nisy roalahy malaza be tamin'ny hefetsena sy halatra, dia Ikotofetsy sy Imahaka...",
-  //     image: require('@/assets/images/image3.jpg'),
-  //   },
-  // ];
 
   return (
     <View style={styles.container}>
@@ -147,7 +105,6 @@ export default function HomeScreen({ navigation }) {
         );
       })}
     </ScrollView>
-
      
       <Text style={styles.tongasoa}>Angano malaza</Text> 
       <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.conteContainer}> 
@@ -183,8 +140,6 @@ const styles = StyleSheet.create({
     padding: 20,
     backgroundColor: '#FFF7F0',
   },
-
-
   // card ohabolana anio
   headerBox: {
     borderRadius: 15,
@@ -199,15 +154,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     position: 'relative',
   },
-
   //Texte Ohabolana anio
   headerText1: {
     fontFamily: 'Poppins_700Bold',
     fontSize: 17,
     color: '#4A4A4A',
   },
-
-
   //Texte ohabolana
   headerText: {
     fontFamily: 'Poppins_400Regular',
@@ -216,8 +168,6 @@ const styles = StyleSheet.create({
     maxWidth: '85%',
     color: '#4A4A4A',
   },
-
-
   //image
   headerImage: {
     position: 'absolute',
@@ -227,24 +177,17 @@ const styles = StyleSheet.create({
     height: 100,
     resizeMode: 'contain',
   },
-
-
   //Texte Ho anao, Tantara malaza
   tongasoa: {
     fontFamily: 'Poppins_700Bold',
-
     fontSize: 17,
     paddingVertical: 15,
     color: '#4A4A4A',
   },
-
-
   //Card Ho anao ,Tantara malaza
   categoryCard: {
     marginRight: 12,
   },
-
-
   //Image container Ho anao 
   imageWrapper: {
     width: 180,
@@ -253,16 +196,12 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     position: 'relative',
   },
-
-
   //Image Ho anao
   categoryImage: {
     width: '100%',
     height: '100%',
     resizeMode: 'cover',
   },
-
-
   //Partie Mampalahelo dans la card
   imageOverlay: {
     position: 'absolute',
@@ -272,20 +211,16 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingLeft: 8,
   },
- 
   //Texte Mampalahelo( nom catégorie)
   imageOverlayText: {
     fontFamily: 'Poppins_700Bold',
     fontSize: 14,
     color: '#4A4A4A',
   },
-
-
   //Angano malaza
   conteContainer: {
     marginTop: 5,
   },
-
   // card Angano malaza
   conteCard: {
     flexDirection: 'row',
@@ -296,16 +231,12 @@ const styles = StyleSheet.create({
     width: 290,
     height: 125,
   },
-
-
   //Texte Angano malaza
   storyTextContainer: {
     flexShrink: 1, 
     paddingLeft: 10,
-    color: '#4A4A4A',
-    
+    color: '#4A4A4A', 
   },
-
   //Titre angano
   conteTitle: {
     fontFamily: 'Poppins_700Bold',
@@ -314,7 +245,6 @@ const styles = StyleSheet.create({
     marginBottom: 5,
     color: '#4A4A4A',
   },
- 
   // texte 
   conteText: {
     fontFamily: 'Poppins_400Regular',

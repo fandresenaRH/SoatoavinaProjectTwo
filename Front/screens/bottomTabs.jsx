@@ -9,8 +9,6 @@ import { PlayfairDisplay_700Bold } from '@expo-google-fonts/playfair-display';  
 import * as Font from 'expo-font';
 import { ThemeContext, LanguageContext } from "../component/AppContext"; //mode nuit/jour malagasy /anglais 
 
-
-
 import HomeScreen from '@/screens/HomeScreen';  //Fandraisana
 import TantaraScreen from '@/screens/TantaraScreen';  //Angano
 import Ohabolana2 from '@/screens/Ohabolana2';  //Ohabolana
@@ -26,8 +24,6 @@ import Chat from '@/component/chat'
 
 const Stack = createStackNavigator();  //Instanciation
 const Tab = createBottomTabNavigator();
-
-
 
 //Pile de navigation an'i Fandraisana
 function LibraryStack({navigation}) {  
@@ -127,8 +123,6 @@ function FianaranaScreen() {
   );
 }
 
-
-{/* Fonction principale App, point d'entrée*/}
 export default function BottomTab() {
   const [fontsLoaded, setFontsLoaded] = useState(false);  //Garder une trace de changements des polices
 
@@ -155,7 +149,6 @@ export default function BottomTab() {
     );
   }
 
-  {/*Navigation sy création des tabs*/}
   return ( 
       <Tab.Navigator
         initialRouteName='Fandraisana'
@@ -198,7 +191,6 @@ export default function BottomTab() {
         })}
       >
 
-        {/*Ajouts des onglets*/}
         <Tab.Screen name="Rakibolana" component={RakibolanaScreen} />
         <Tab.Screen name="Angano" component={TantaraStack} options={{ title: 'Angano' }} />
         <Tab.Screen name="Fandraisana" component={LibraryStack} />

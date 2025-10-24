@@ -8,18 +8,15 @@ import { useFonts, Poppins_400Regular, Poppins_700Bold } from '@expo-google-font
 import  { ThemeContext, LanguageContext } from "../component/AppContext";
 import {API} from '../api/api';
 
-// const data =[
-//   {id :"1", description : "Aleo very tsikalakalam-bola toy izay very tsikalakalam-pihavanana.",pageName:"Fihavanana1",nomUser:"Mirana Andriniaina",commentaire:"Tsy dia mihatra intsony eo amin'ny fiaraha-monina malagasy ity ohabolana ity"},
-//   {id :"2", description: "Izay mahavangivangy tian-kavana; ny malemy fanahy tratra amp-parany.", pageName:"Fihavanana2",nomUser:"Fitia Rakoto",commentaire:"Tsy dia mihatra intsony eo amin'ny fiaraha-monina malagasy ity ohabolana ity"},
-//   {id :"3", description: "Fitia mifamaly mahatsara fihavanana.", pageName:"Fihavanana3",nomUser:"Lova Andriniaina",commentaire:"Tsy dia mihatra intsony eo amin'ny fiaraha-monina malagasy ity ohabolana ity"},
-//   {id :"4", description: "Ny ahiahy tsy ihavanana .", pageName:"Fihavanana4",nomUser:"Nirina Rabe",commentaire:"Tsy dia mihatra intsony eo amin'ny fiaraha-monina malagasy ity ohabolana ity"}
-// ]
-
 export default function Ohabolana({navigation}){
   const[data, setData] = useState([]);
   const [search,setSearch]= useState('');
   const heartRef = useRef(null)
   const [liked,setLiked]= useState(false)
+  // mode nuit et jour
+  const { isDarkMode } = useContext(ThemeContext);
+  // malagasy/anglais
+  const { language } = useContext(LanguageContext);
 
   const handleLike = () =>{
     if (liked){
@@ -27,7 +24,6 @@ export default function Ohabolana({navigation}){
     }else{
       heartRef?.current?.play(30,144)
     }
-
     setLiked(!liked)
   }
 
@@ -47,15 +43,9 @@ export default function Ohabolana({navigation}){
   });
   if (!fontsLoaded) return null;
 
-  // mode nuit et jour
-  const { isDarkMode } = useContext(ThemeContext);
-  // malagasy/anglais
-  const { language } = useContext(LanguageContext);
-
     const renderItem = ({ item }) => (
-            <View key={item.idProverbe} style={styles.chaqueElts}>
+            <View style={styles.chaqueElts}>
               <Pressable
-                  
                   onPress={()=>navigation.navigate('Fihavanana1', { proverbe: item })}
                   style = {({pressed})=>[
                     styles.bouton,{ backgroundColor : pressed?"#FFF7F7":"#FFF7F7"}
@@ -75,7 +65,6 @@ export default function Ohabolana({navigation}){
 
     const styles = StyleSheet.create({
       container:{
-      // backgroundColor:"#FFF7F7",
       backgroundColor: isDarkMode ? " #1A1A2E" : "#FFF7F7",
       },
       titre:{
@@ -165,11 +154,12 @@ export default function Ohabolana({navigation}){
         </View>
       </View>
 
-         <FlatList
-            data={data}
-            keyExtractor={(item) => item.id}
-            renderItem={renderItem}
-          />
+      <FlatList
+        data={data}
+        keyExtractor={(item) => item.idProverbe.toString()}
+        renderItem={renderItem}
+      />
+
 
     </View>
   )

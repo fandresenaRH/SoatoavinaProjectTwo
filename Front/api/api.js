@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "http://10.122.64.222:8000";
+const BASE_URL = "http://10.77.29.222:8000";
 
 export const API = axios.create({
     baseURL: BASE_URL, //  backend FastAPI

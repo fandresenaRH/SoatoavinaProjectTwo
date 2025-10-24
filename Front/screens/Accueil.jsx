@@ -17,7 +17,6 @@ export default function Accueil ({navigation}){
   )
 }
 
-
 const styles = StyleSheet.create({
   gradient:{
     height:800,
@@ -31,12 +30,4 @@ const styles = StyleSheet.create({
     marginTop:'68%'
   }
 })
-// import { View, Text } from "react-native";
 
-// export default function Accueil () {
-//   return (
-//     <View className="flex-1 items-center justify-center bg-red-500">
-//       <Text className="text-white text-3xl font-bold">Test NativeWind 🔥</Text>
-//     </View>
-//   );
-// }

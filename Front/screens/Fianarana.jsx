@@ -5,8 +5,7 @@ import { useFonts, Poppins_400Regular, Poppins_700Bold } from '@expo-google-font
 import { ThemeContext, LanguageContext } from "../component/AppContext";
 
 export default function Fianarana({navigation}){
-
-     // mode nuit et jour
+  // mode nuit et jour
   const { isDarkMode } = useContext(ThemeContext);
   // malagasy/anglais
   const { language } = useContext(LanguageContext);
@@ -82,7 +81,6 @@ export default function Fianarana({navigation}){
             <LinearGradient
                 colors={
                     isDarkMode
-                    //   ? ["#0f0f0f", "#1a1a1a", "#262626"] // 🌑 Gradient mode nuit #1A1A2E
                     ? ["black", "#2A1A3E"] 
                       : ['#FEE6E6', '#FDE6D0', '#FCE6A7']            // ☀️ Gradient mode jour
                   }

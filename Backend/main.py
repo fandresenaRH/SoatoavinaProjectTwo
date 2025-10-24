@@ -1,4 +1,4 @@
-from controller import conteController, proverbeController
+from controller import conteController, proverbeController, soatoavinaController
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
@@ -21,6 +21,7 @@ app.add_middleware(
 
 app.include_router(conteController.router)
 app.include_router(proverbeController.router)
+app.include_router(soatoavinaController.router)
 
 app.mount("/static", StaticFiles(directory="D:/Soatoavina 2.0/images"), name="static")#Pour autoriser l'image
 

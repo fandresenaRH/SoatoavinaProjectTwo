@@ -45,7 +45,6 @@ export default function Parametre() {
       <Text style={styles.title}>
         {language === "mg" ? "Fikirakirana" : "Settings"}
       </Text>
-
       {/* Thème */}
       <View style={styles.row}>
         <View style={styles.rowLeft}>
@@ -67,7 +66,6 @@ export default function Parametre() {
         </View>
         <Switch value={isDarkMode} onValueChange={setIsDarkMode} />
       </View>
-
       {/* Langue */}
       <View style={styles.row}>
         <View style={styles.rowLeft}>

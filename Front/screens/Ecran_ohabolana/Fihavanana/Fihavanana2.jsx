@@ -6,7 +6,6 @@ import { LinearGradient } from 'expo-linear-gradient';
 const Fihavanana2 = () => {
   return (
     <View style={styles.container}>
-      {/* <View> */}
       <LinearGradient
         colors={['#FFF7F0', '#FDE6D0', '#FFCA6F']}
         style={styles.gradient}
@@ -15,7 +14,6 @@ const Fihavanana2 = () => {
         <View style={styles.ohabolana}>
           <View>
             <FontAwesome name="quote-left" size={12} style={styles.quote_left}/>
-            {/* asina anle coeur */}
           </View>
             <Text style={styles.description}>Izay mahavangivangy tian-kavana; ny malemy fanahy tratra amp-parany.</Text>
           <FontAwesome name="quote-right" size={12} style={styles.quote_right}/>
@@ -71,7 +69,6 @@ const styles = StyleSheet.create({
     marginLeft:'12%',
     borderRadius:20,
     marginTop:10
-    // alignItems:"center"
   },
   quote_left:{
     marginTop: 10,

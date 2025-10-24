@@ -1,16 +1,37 @@
 import React, { useState, useRef } from 'react';
 
 //keuboard: contrôle anle clavier
-import {View,Text,TextInput,StyleSheet,Animated,Keyboard,TouchableWithoutFeedback,TouchableOpacity,Platform,} from 'react-native';
+import {View,Text,TextInput,StyleSheet,Animated,Keyboard,TouchableWithoutFeedback,TouchableOpacity,Platform,FlatList,ScrollView} from 'react-native';
 import { Ionicons } from '@expo/vector-icons';  //icône loupe
 import { LinearGradient } from 'expo-linear-gradient';  //fond dégradé
 import { useFonts, Poppins_400Regular, Poppins_700Bold } from '@expo-google-fonts/poppins';  //police
+import {API, BASE_URL} from '../api/api';
+
+
+ // <Animated.View style={[styles.resultContainer, { transform: [{ translateY: slideAnim }] }]}> 
+          //   <Text style={styles.soatoavina}>{result.nomSoatoavina}</Text>
+
+          //   <Text style={styles.section}>FAMARITANA</Text>
+          //   <Text style={styles.definition}>{result.definition}</Text>
+
+          //   <Text style={styles.section}>FANAZAVANA</Text>
+          //   <Text style={styles.definition}>{result.explication}</Text>
+
+          //   <Text style={styles.section}>FIAVIANA</Text>
+          //   <Text style={styles.definition}>{result.origine}</Text>
+
+          //   <TouchableOpacity style={styles.ohabolanaBtn} onPress={()=>navigation.navigate('Ohabolana')}>  
+          //     <Ionicons name="chatbubble-ellipses-outline" size={16} color="#f4b860" />
+          //     <Text style={styles.ohabolanaText}>OHABOLANA</Text>
+          //   </TouchableOpacity>
+          // </Animated.View>
 
 
 export default function RakibolanaScreen({navigation}) {
   const [searchText, setSearchText] = useState('');  //texte recherché, initialisation chaîne vide
   const [showResult, setShowResult] = useState(false);  //mbola tsy affiché le resulatat
   const slideAnim = useRef(new Animated.Value(400)).current;  //animation affichage du card de résultat, 400px
+  const [result, setResult] = useState(null);
 
   const [fontsLoaded] = useFonts({
     Poppins_400Regular,
@@ -20,15 +41,47 @@ export default function RakibolanaScreen({navigation}) {
   if (!fontsLoaded) return null;
 
 
-  const handleSearch = () => {
+  const handleSearch = async () => {
     Keyboard.dismiss();  
-    setShowResult(true);  
-    Animated.timing(slideAnim, {
-      toValue: 0,
-      duration: 500,
-      useNativeDriver: true,
-    }).start();  
+    try {
+      const response = await API.get(`soatoavina/recherche`, {
+        params: { nom: searchText },
+      });
+
+      setResult(response.data);
+      setShowResult(true);  
+      
+      Animated.timing(slideAnim, {
+        toValue: 0,
+        duration: 500,
+        useNativeDriver: true,
+      }).start();  
+    } catch (error) {
+      console.error("Erreur : ", error);
+      Alert.alert("Soatoavina tsy hita", "Tsy misy valiny amin'ny anarana naroso.");
+      setShowResult(false);
+    }
   };
+
+  // const renderItem = ({ item }) => (
+  //   <Animated.View style={[styles.resultContainer, { transform: [{ translateY: slideAnim }] }]}> 
+  //             <Text style={styles.soatoavina}>{result.nomSoatoavina}</Text>
+  
+  //             <Text style={styles.section}>FAMARITANA</Text>
+  //             <Text style={styles.definition}>{result.definition}</Text>
+  
+  //             <Text style={styles.section}>FANAZAVANA</Text>
+  //             <Text style={styles.definition}>{result.explication}</Text>
+  
+  //             <Text style={styles.section}>FIAVIANA</Text>
+  //             <Text style={styles.definition}>{result.origine}</Text>
+  
+  //             <TouchableOpacity style={styles.ohabolanaBtn} onPress={()=>navigation.navigate('Ohabolana')}>  
+  //               <Ionicons name="chatbubble-ellipses-outline" size={16} color="#f4b860" />
+  //               <Text style={styles.ohabolanaText}>OHABOLANA</Text>
+  //             </TouchableOpacity>
+  //           </Animated.View>
+  // );
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}> 
@@ -60,25 +113,38 @@ export default function RakibolanaScreen({navigation}) {
 
   
         {showResult && (  
-          <Animated.View style={[styles.resultContainer, { transform: [{ translateY: slideAnim }] }]}>  {/*Animation */}
+          //  <FlatList
+          //  data={result}
+          //  keyExtractor={(item) => item.idSoatoavina.toString()}
+          //  renderItem={renderItem}
+          // />
+          <Animated.View style={[styles.resultContainer, { transform: [{ translateY: slideAnim }] }]}> 
+            <View style={styles.corps}>
+              <ScrollView
+                // style={{ flex: 1 }}
+                contentContainerStyle={{ paddingBottom: 40 }}
+                contentContainerStyle={styles.scrollContent}
+                showsVerticalScrollIndicator={false}
+              >
+                <Text style={styles.soatoavina}>{result.nomSoatoavina}</Text>
 
-            <Text style={styles.soatoavina}>Hasina</Text>
+                <Text style={styles.section}>FAMARITANA</Text>
+                <Text style={styles.definition}>{result.definition}</Text>
 
-            <Text style={styles.section}>FAMARITANA</Text>
-            <Text style={styles.definition}>Ny Hasina dia hery masina, na tsodrano, na fanajana miaraka amin’ny fahefana...</Text>
+                <Text style={styles.section}>FANAZAVANA</Text>
+                <Text style={styles.definition}>{result.explication}</Text>
 
-            <Text style={styles.section}>FANAZAVANA</Text>
-            <Text style={styles.definition}>Ny Hasina dia hery masina, na tsodrano, na fanajana miaraka amin’ny fahefana...</Text>
+                <Text style={styles.section}>FIAVIANA</Text>
+                <Text style={styles.definition}>{result.origine}</Text>
 
-            <Text style={styles.section}>FIAVIANA</Text>
-            <Text style={styles.definition}>Soatoavina fahiny, mifamatotra amin’ny finoan’ny Malagasy...
-            </Text>
-
-            <TouchableOpacity style={styles.ohabolanaBtn} onPress={()=>navigation.navigate('Ohabolana')}>  {/*Bouton misediriger vers page Ohabolana mifandraika*/}
-              <Ionicons name="chatbubble-ellipses-outline" size={16} color="#f4b860" />
-              <Text style={styles.ohabolanaText}>OHABOLANA</Text>
-            </TouchableOpacity>
+                <TouchableOpacity style={styles.ohabolanaBtn} onPress={()=>navigation.navigate('Ohabolana')}>  
+                  <Ionicons name="chatbubble-ellipses-outline" size={16} color="#f4b860" />
+                  <Text style={styles.ohabolanaText}>OHABOLANA</Text>
+                </TouchableOpacity>
+              </ScrollView>
+            </View>
           </Animated.View>
+        
         )}
       </LinearGradient>
     </TouchableWithoutFeedback>
@@ -91,7 +157,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
     paddingTop: Platform.OS === 'android' ? 80 : 120,
   },
-
   //titre
   title: {
     fontSize: 22,
@@ -100,7 +165,6 @@ const styles = StyleSheet.create({
     marginBottom: 28,
     color: '#4A4A4A',
   },
-
   //barre de recherche
   searchBar: {
     flexDirection: 'row',
@@ -113,13 +177,11 @@ const styles = StyleSheet.create({
     marginBottom: 24,
     backgroundColor: '#fff',
   },
-
   //icône loupe
   searchIcon: {
     marginRight: 8,
     color: '#FEB937',
   },
-
   //input recherche
   input: {
     flex: 1,
@@ -128,20 +190,25 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#333',
   },
-
+  corps:{
+    borderRadius: 40,
+    paddingRight : 20,
+  },
+  scrollContent: {
+    paddingBottom: 50,
+  },
   //box de résultat
   resultContainer: {
+    flex: 1,                // Ajoute cette ligne
     backgroundColor: '#fff',
     padding: 20,
     borderRadius: 16,
     shadowColor: '#000',
     shadowOpacity: 0.1,
-    
     shadowRadius: 8,
     elevation: 4,
+    maxHeight: '70%',       // Optionnel : limite la hauteur visible
   },
-
-
   //soatoavina  (ici: Hasina)
   soatoavina: {
     fontFamily: 'Poppins_700Bold',
@@ -149,7 +216,6 @@ const styles = StyleSheet.create({
     marginBottom: 12,
     color: '#4A4A4A',
   },
-
   //Famaritana fanazavana Fiaviana
   section: {
     fontFamily: 'Poppins_700Bold',
@@ -158,8 +224,6 @@ const styles = StyleSheet.create({
     marginBottom: 6,
     color: '#4A4A4A',
   },
-
-  
   //Famaritana fanazavana Fiaviana
   definition: {
     fontFamily: 'Poppins_400Regular',
@@ -167,16 +231,13 @@ const styles = StyleSheet.create({
     lineHeight: 22,
     color: '#4A4A4A',
   },
-
   // Bouton Ohabolana
   ohabolanaBtn: {
     marginTop: 30,
     flexDirection: 'row',
     alignItems: 'center',
     paddingVertical: 8,
-    
   },
-
   //Texte ohabolana
   ohabolanaText: {
     color: '#FEB937',
@@ -184,5 +245,4 @@ const styles = StyleSheet.create({
     fontFamily: 'Poppins_700Bold',
     fontSize: 14,
   },
-
 });
