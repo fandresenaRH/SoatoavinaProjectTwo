@@ -1,0 +1,17 @@
+{
+  "extends": "expo/tsconfig.base",
+  "compilerOptions": {
+    "strict": true,
+    "paths": {
+      "@/*": [
+        "./*"
+      ]
+    }
+  },
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    ".expo/types/**/*.ts",
+    "expo-env.d.ts"
+, "screens/Ohabolana.jsx", "screens/Fihavanana.jsx", "screens/Fianarana.jsx", "screens/Angano.jsx", "component/ListeOhabolana.jsx" ]
+}
